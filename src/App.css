@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+.input{
+  width: 400px;
+  font-size: 18px;
+  padding-inline: 20px;
+  padding-block: 5px;
+}
+
+.btn{
+  position: relative;
+  text-align: center;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.add{
+  width: 40px;
+  height: 40px;
+}
+
+.add span{
+  position: absolute;
+  bottom: 11%;
+  right: 18%;
+}
+
+.remove{
+  width: 30px;
+  height: 30px;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
