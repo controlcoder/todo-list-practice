@@ -41,6 +41,7 @@ function App() {
   const clearItem = (id: string) => {
     const filteredItems = items.filter((item) => item.id !== id);
     setItems(filteredItems);
+    setStorageItem(filteredItems);
   };
 
   const completeTask = (id: string) => {
