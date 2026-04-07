@@ -1,16 +1,16 @@
-import type { Item } from "../App";
+import ListItem from "../model/ListItem";
 
 type BottomProps = {
-  items: Item[];
+  items: ListItem[];
   clearAll: () => void;
-  clearItem: (id: string) => void;
+  removeItem: (id: string) => void;
   completeTask: (id: string) => void;
 };
 
 export default function Bottom({
   items,
   clearAll,
-  clearItem,
+  removeItem,
   completeTask,
 }: BottomProps) {
   return (
@@ -26,7 +26,7 @@ export default function Bottom({
       </div>
       <hr />
       <div className="py-6 flex flex-col gap-8">
-        {items.map(({ id, data, checked }) => {
+        {items.map(({ id, item, checked }) => {
           return (
             <div key={id} className="flex items-center justify-between px-6">
               <div className="flex gap-8">
@@ -39,10 +39,10 @@ export default function Bottom({
                     completeTask(id);
                   }}
                 />
-                <p className="text-xl">{data}</p>
+                <p className="text-xl">{item}</p>
               </div>
               <div
-                onClick={() => clearItem(id)}
+                onClick={() => removeItem(id)}
                 className="remove btn text-xl rounded bg-white text-black"
               >
                 <span>X</span>

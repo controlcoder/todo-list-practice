@@ -1,56 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Bottom from "./components/Bottom";
 import Top from "./components/Top";
 
-export interface Item {
-  id: string;
-  data: string;
-  checked: boolean;
-}
+import ListItem from "./model/ListItem";
+import FullList from "./model/FullList";
 
 function App() {
-  const getStorageItem = () => {
-    const data = localStorage.getItem("myList");
-    if (!data) return "null";
-    return data;
-  };
+  const [items, setItems] = useState<ListItem[]>([]);
 
-  const setStorageItem = (data: Item[]) => {
-    localStorage.setItem("myList", JSON.stringify(data));
-  };
+  const list = FullList.instance;
 
-  const myList = JSON.parse(getStorageItem());
+  useEffect(() => {
+    list.load();
 
-  let [items, setItems] = useState<Item[]>(myList ? myList : []);
+    setItems([...list.list]);
+
+    return () => {
+      setItems([]);
+    };
+  }, []);
 
   const addItem = (input: string) => {
-    const item: Item = { id: crypto.randomUUID(), data: input, checked: false };
+    const newItem = new ListItem(crypto.randomUUID(), input, false);
+    list.addItem(newItem);
+    setItems([...list.list]);
+  };
 
-    setItems((prev) => {
-      setStorageItem([...prev, item]);
-      return [...prev, item];
-    });
+  const removeItem = (id: string) => {
+    list.removeItem(id);
+    setItems([...list.list]);
   };
 
   const clearAll = () => {
+    list.clearList();
     setItems([]);
-    setStorageItem([]);
-  };
-
-  const clearItem = (id: string) => {
-    const filteredItems = items.filter((item) => item.id !== id);
-    setItems(filteredItems);
-    setStorageItem(filteredItems);
   };
 
   const completeTask = (id: string) => {
-    const filteredItems = items.map((item) => {
-      if (item.id === id) item.checked = true;
-      return item;
-    });
-    setItems(filteredItems);
-    setStorageItem(filteredItems);
+    list.completeTask(id);
+    setItems([...list.list]);
   };
 
   return (
@@ -59,8 +48,8 @@ function App() {
       <Bottom
         items={items}
         clearAll={clearAll}
-        clearItem={clearItem}
         completeTask={completeTask}
+        removeItem={removeItem}
       />
     </div>
   );
