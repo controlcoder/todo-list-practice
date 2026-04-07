@@ -28,6 +28,8 @@ export default class FullList implements List {
 
     const parsedList: ListItem[] = JSON.parse(storedList);
 
+    this._list = [];
+
     parsedList.forEach(({ id, item, checked }) => {
       const newListItem = new ListItem(id, item, checked);
       FullList.instance.addItem(newListItem);
