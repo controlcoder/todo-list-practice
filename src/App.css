@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .input{
-  width: 400px;
+  width: 90%;
   font-size: 18px;
   padding-inline: 20px;
   padding-block: 5px;

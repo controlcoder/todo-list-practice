@@ -14,7 +14,7 @@ export default function Top({ addItem }: TopProps) {
 
   const [input, setInput] = useState("");
   return (
-    <div className="flex items-center gap-5 border border-white p-6 rounded-lg text-black">
+    <div className="flex items-center justify-between gap-5 border max-w-112 w-full border-white p-6 rounded-lg text-black">
       <input
         onKeyDown={(e) => {
           if (e.key === "Enter") {

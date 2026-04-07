@@ -14,7 +14,7 @@ export default function Bottom({
   completeTask,
 }: BottomProps) {
   return (
-    <div className="border rounded-md border-white w-150 overflow-y-scroll">
+    <div className="border rounded-md border-white max-w-150 w-full overflow-y-scroll">
       <div className="flex items-center justify-between px-6 py-4">
         <h1 className="text-2xl">List</h1>
         <button

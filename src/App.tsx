@@ -54,7 +54,7 @@ function App() {
   };
 
   return (
-    <div className="pt-10 h-screen bg-[#323232] text-white flex flex-col items-center gap-15">
+    <div className="pt-10 h-screen px-6 bg-[#323232] text-white flex flex-col items-center gap-15">
       <Top addItem={addItem} />
       <Bottom
         items={items}
