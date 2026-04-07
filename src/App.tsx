@@ -13,12 +13,7 @@ function App() {
 
   useEffect(() => {
     list.load();
-
     setItems([...list.list]);
-
-    return () => {
-      setItems([]);
-    };
   }, []);
 
   const addItem = (input: string) => {
@@ -42,6 +37,11 @@ function App() {
     setItems([...list.list]);
   };
 
+  const updateTask = (id: string, updatedTask: string) => {
+    list.updateItem(id, updatedTask);
+    setItems([...list.list]);
+  };
+
   return (
     <div className="pt-10 h-screen px-6 bg-[#323232] text-white flex flex-col items-center gap-15">
       <Top addItem={addItem} />
@@ -50,6 +50,7 @@ function App() {
         clearAll={clearAll}
         completeTask={completeTask}
         removeItem={removeItem}
+        updateTask={updateTask}
       />
     </div>
   );

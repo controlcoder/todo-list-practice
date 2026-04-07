@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ListItem from "../model/ListItem";
 
 type BottomProps = {
@@ -5,6 +6,7 @@ type BottomProps = {
   clearAll: () => void;
   removeItem: (id: string) => void;
   completeTask: (id: string) => void;
+  updateTask: (id: string, updateTask: string) => void;
 };
 
 export default function Bottom({
@@ -12,7 +14,12 @@ export default function Bottom({
   clearAll,
   removeItem,
   completeTask,
+  updateTask,
 }: BottomProps) {
+  const [editId, setEditId] = useState<string | null>(null);
+
+  const [updatedInput, setUpdatedInput] = useState("");
+
   return (
     <div className="border rounded-md border-white max-w-150 w-full overflow-y-scroll">
       <div className="flex items-center justify-between px-6 py-4">
@@ -39,13 +46,54 @@ export default function Bottom({
                     completeTask(id);
                   }}
                 />
-                <p className="text-xl">{item}</p>
+                {editId !== id ? (
+                  <p className="text-xl">{item}</p>
+                ) : (
+                  <input
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        setEditId(null);
+                        setUpdatedInput("");
+                        updateTask(id, updatedInput);
+                      }
+                    }}
+                    className="bg-white outline-none text-[20px] text-black"
+                    type="text"
+                    value={updatedInput}
+                    onChange={(e) => setUpdatedInput(e.target.value)}
+                  />
+                )}
               </div>
-              <div
-                onClick={() => removeItem(id)}
-                className="remove btn text-xl rounded bg-white text-black"
-              >
-                <span>X</span>
+              <div className="flex gap-2">
+                {!checked && (
+                  <div
+                    onClick={() => {
+                      setEditId(id);
+                      setUpdatedInput(item);
+                    }}
+                    className="update btn text-xl rounded bg-white text-black"
+                  >
+                    {editId === id ? (
+                      <p
+                        onClick={() => {
+                          setEditId(null);
+                          setUpdatedInput("");
+                          updateTask(id, updatedInput);
+                        }}
+                      >
+                        ✓
+                      </p>
+                    ) : (
+                      <i className="fa fa-edit"></i>
+                    )}
+                  </div>
+                )}
+                <div
+                  onClick={() => removeItem(id)}
+                  className="remove btn text-xl rounded bg-white text-black"
+                >
+                  <span>X</span>
+                </div>
               </div>
             </div>
           );
@@ -65,4 +113,37 @@ export default function Bottom({
     <span>X</span>
   </div>
 </div> */
+}
+
+{
+  /* return (
+  <div key={id} className="flex items-center justify-between px-6">
+    <div className="flex gap-8">
+      <input
+        type="checkbox"
+        className="w-5"
+        checked={checked}
+        disabled={checked}
+        onChange={() => {
+          completeTask(id);
+        }}
+      />
+      <p className="text-xl">{item}</p>
+    </div>
+    <div className="flex gap-2">
+      <div
+        onClick={() => setEditId(id)}
+        className="update btn text-xl rounded bg-white text-black"
+      >
+        <i className="fa fa-edit"></i>
+      </div>
+      <div
+        onClick={() => removeItem(id)}
+        className="remove btn text-xl rounded bg-white text-black"
+      >
+        <span>X</span>
+      </div>
+    </div>
+  </div>
+); */
 }
