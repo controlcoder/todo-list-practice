@@ -5,15 +5,13 @@ type BottomProps = {
   items: ListItem[];
   clearAll: () => void;
   removeItem: (id: string) => void;
-  completeTask: (id: string) => void;
-  updateTask: (id: string, updateTask: string) => void;
+  updateTask: (id: string, updateTask?: string) => void;
 };
 
 export default function Bottom({
   items,
   clearAll,
   removeItem,
-  completeTask,
   updateTask,
 }: BottomProps) {
   const [editId, setEditId] = useState<string | null>(null);
@@ -43,7 +41,7 @@ export default function Bottom({
                   checked={checked}
                   disabled={checked || editId === id}
                   onChange={() => {
-                    completeTask(id);
+                    updateTask(id);
                   }}
                 />
                 {editId !== id ? (
@@ -103,7 +101,7 @@ export default function Bottom({
   );
 }
 
-// add same logic to updateTask
+
 // replace item with task & other changes where necessary
 // add logic to support filter options
 

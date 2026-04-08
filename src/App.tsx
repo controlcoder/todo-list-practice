@@ -32,13 +32,10 @@ function App() {
     setItems([]);
   };
 
-  const completeTask = (id: string) => {
-    list.completeTask(id);
-    setItems([...list.list]);
-  };
 
-  const updateTask = (id: string, updatedTask: string) => {
-    list.updateItem(id, updatedTask);
+  const updateTask = (id: string, updatedTask?: string) => {
+    if(updatedTask) list.updateItem(id, updatedTask, false);
+    else list.updateItem(id, "", true);
     setItems([...list.list]);
   };
 
@@ -48,7 +45,6 @@ function App() {
       <Bottom
         items={items}
         clearAll={clearAll}
-        completeTask={completeTask}
         removeItem={removeItem}
         updateTask={updateTask}
       />

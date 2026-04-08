@@ -7,8 +7,7 @@ interface List {
   clearList(): void;
   addItem(itemObj: ListItem): void;
   removeItem(id: string): void;
-  updateItem(id: string, value: string): void;
-  completeTask(id: string): void;
+  updateItem(id: string, value: string, completed: boolean): void;
 }
 
 export default class FullList implements List {
@@ -66,17 +65,11 @@ export default class FullList implements List {
     this.save();
   }
 
-  updateItem(id: string, value: string): void {
+  updateItem(id: string, value: string, completed: boolean): void {
     const item = this.list.find((item) => item.id === id);
     if (!item) return;
-    item.item = value;
-    this.save();
-  }
-
-  completeTask(id: string) {
-    const item = this.list.find((item) => item.id === id);
-    if (!item) return;
-    item.checked = true;
+    if (completed) item.checked = completed;
+    if(value) item.item = value;
     this.save();
   }
 }
