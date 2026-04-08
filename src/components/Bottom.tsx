@@ -41,7 +41,7 @@ export default function Bottom({
                   type="checkbox"
                   className="w-5"
                   checked={checked}
-                  disabled={checked}
+                  disabled={checked || editId === id}
                   onChange={() => {
                     completeTask(id);
                   }}
@@ -103,47 +103,12 @@ export default function Bottom({
   );
 }
 
-{
-  /* <div className="flex items-center justify-between px-6">
-  <div className="flex gap-8">
-    <input type="checkbox" className="w-5" />
-    <p className="text-xl">Make a video</p>
-  </div>
-  <div className="remove btn text-xl rounded bg-white text-black">
-    <span>X</span>
-  </div>
-</div> */
-}
+// improve update functionality on tick
+// improve complete functionality
+// add same logic to updateTask
+// replace item with task & other changes where necessary
+// add logic to support filter options
 
-{
-  /* return (
-  <div key={id} className="flex items-center justify-between px-6">
-    <div className="flex gap-8">
-      <input
-        type="checkbox"
-        className="w-5"
-        checked={checked}
-        disabled={checked}
-        onChange={() => {
-          completeTask(id);
-        }}
-      />
-      <p className="text-xl">{item}</p>
-    </div>
-    <div className="flex gap-2">
-      <div
-        onClick={() => setEditId(id)}
-        className="update btn text-xl rounded bg-white text-black"
-      >
-        <i className="fa fa-edit"></i>
-      </div>
-      <div
-        onClick={() => removeItem(id)}
-        className="remove btn text-xl rounded bg-white text-black"
-      >
-        <span>X</span>
-      </div>
-    </div>
-  </div>
-); */
-}
+// make this project again with different pattern
+
+// explore other available patterns
