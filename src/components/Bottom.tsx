@@ -66,13 +66,7 @@ export default function Bottom({
               </div>
               <div className="flex gap-2">
                 {!checked && (
-                  <div
-                    onClick={() => {
-                      setEditId(id);
-                      setUpdatedInput(item);
-                    }}
-                    className="update btn text-xl rounded bg-white text-black"
-                  >
+                  <div className="update btn text-xl rounded bg-white text-black">
                     {editId === id ? (
                       <p
                         onClick={() => {
@@ -84,7 +78,13 @@ export default function Bottom({
                         ✓
                       </p>
                     ) : (
-                      <i className="fa fa-edit"></i>
+                      <i
+                        onClick={() => {
+                          setEditId(id);
+                          setUpdatedInput(item);
+                        }}
+                        className="fa fa-edit"
+                      ></i>
                     )}
                   </div>
                 )}
@@ -103,8 +103,6 @@ export default function Bottom({
   );
 }
 
-// improve update functionality on tick
-// improve complete functionality
 // add same logic to updateTask
 // replace item with task & other changes where necessary
 // add logic to support filter options
